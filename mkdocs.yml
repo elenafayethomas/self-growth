@@ -1,0 +1,7 @@
+site_name: Self Growth 🌱
+site_description: Little improvements, day by day.
+
+plugins:
+  - awesome-pages:
+      collapse_single_pages: true
+  - techdocs-core
