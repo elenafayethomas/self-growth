@@ -44,3 +44,19 @@ import somemodule as somemod
 # good: helps with nesting, though the top level namespace is lost so could reduce clarity
 from somemodule import submodule
 ```
+
+## Git
+
+To debug what is going wrong with a Git command, use `GIT_TRACE`. `GIT_CURL_VERBOSE` can also be used for more details. For example:
+
+```shell
+GIT_TRACE=1 git commit -m "fix: bug in code"
+```
+
+For `GIT_CURL_VERBOSE`:
+
+```shell
+GIT_CURL_VERBOSE=1 GIT_TRACE=1 git pull
+```
+
+More details are available in Git's [docs](https://git-scm.com/book/ms/v2/Git-Internals-Environment-Variables).
