@@ -47,6 +47,8 @@ from somemodule import submodule
 
 ## Git
 
+### Debugging
+
 To debug what is going wrong with a Git command, use `GIT_TRACE`. `GIT_CURL_VERBOSE` can also be used for more details. For example:
 
 ```shell
@@ -60,3 +62,9 @@ GIT_CURL_VERBOSE=1 GIT_TRACE=1 git pull
 ```
 
 More details are available in Git's [docs](https://git-scm.com/book/ms/v2/Git-Internals-Environment-Variables).
+
+### Branches
+
+To get all remote branches, run `git branch -r`. To then prune all branches without a remote, run `git remote prune origin`.
+
+There is a [script](../scripts/git-prune.sh) to do remove local branches that were created from remote branches in the scripts folder. This is a bit more specific in its use case.
