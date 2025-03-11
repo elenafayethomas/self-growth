@@ -67,7 +67,7 @@ More details are available in Git's [docs](https://git-scm.com/book/ms/v2/Git-In
 
 To get all remote branches, run `git branch -r`. To then prune all branches without a remote, run `git remote prune origin`.
 
-There is a [script](../scripts/git-prune.sh) to do remove local branches that were created from remote branches in the scripts folder. This is a bit more specific in its use case.
+There is a [script](../scripts/git-prune.sh) to remove local branches that were created from remote branches in the scripts folder. This is a bit more specific in its use case.
 
 ## AWS Lambda
 
