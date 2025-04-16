@@ -69,6 +69,10 @@ To get all remote branches, run `git branch -r`. To then prune all branches with
 
 There is a [script](../scripts/git-prune.sh) to remove local branches that were created from remote branches in the scripts folder. This is a bit more specific in its use case.
 
+### Configuration
+
+[Link](https://blog.gitbutler.com/how-git-core-devs-configure-git/).
+
 ## AWS Lambda
 
 ### Logging
@@ -116,3 +120,14 @@ export const logger = new Logger({
   logFormatter: new MyServiceLogFormatter(),
 })
 ```
+
+## Podman
+
+Daemonless Docker.
+
+### Links
+
+* Installing on WSL: [link](https://dev.to/bowmanjd/using-podman-on-windows-subsystem-for-linux-wsl-58ji).
+* CLI reference: [link](https://docs.podman.io/en/stable/markdown/podman-container.1.html).
+* Buildpack with Podman: [link](https://buildpacks.io/docs/for-app-developers/how-to/special-cases/build-on-podman/).
+* Fixing `docker.io` not being recognised as a registry by Podman: [link](https://github.com/containers/podman/issues/16096).
