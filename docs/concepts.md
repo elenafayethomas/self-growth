@@ -13,3 +13,14 @@ Low cardinality can be achieved by reducing the number of possible combinations.
 https://www.hashicorp.com/en/blog/writing-custom-terraform-providers
 
 New Relic user example: https://github.com/newrelic/terraform-provider-newrelic/blob/main/newrelic/resource_newrelic_user_management.go
+
+## Hexagonal Architecture
+
+Talk from Alistair Cockburn: https://www.youtube.com/watch?v=k0ykTxw7s0Y
+
+Ports & Adapters/Interactors
+
+Should always describe what ports are used *for*
+
+* Driving ports: outputs (test harness)
+* Driven ports: inputs (database, devices, receivers)
