@@ -24,3 +24,54 @@ Should always describe what ports are used *for*
 
 * Driving ports: outputs (test harness)
 * Driven ports: inputs (database, devices, receivers)
+
+## TypeScript Modules
+
+https://www.typescriptlang.org/docs/handbook/2/modules.html
+
+JavaScript has (too many) ways of creating code modules. The newest method are ES modules (ESM) and the older method is CommonJS. ESM uses the `import` and `export` keywords. Like so:
+
+```typescript
+// @filename: sum.ts
+export function sum(a: number, b: number) {
+    return a + b
+}
+
+// @filename: main.ts
+import { sum } from './sum'
+
+sum(2, 4)
+```
+
+Aliases can also be used when importing:
+
+```typescript
+import { sum as add } from './sum'
+
+add(2, 4)
+```
+
+Namespaces can also be flattened, much like in Python:
+
+```typescript
+import * as math from  './sum'
+
+math.sum(2, 4)
+```
+
+Types can also be exported. This is useful so bundlers, such as [esbuild](https://esbuild.github.io/), know what can be discarded.
+
+```typescript
+// @filename: animals.ts
+export type Cat = {
+    age: number
+    breed: string
+    name: string
+    isFluffy: boolean
+}
+
+// @filename: main.ts
+import { type Cat } from './animals'
+```
+
+For using ESM with CommonJS set the compiler flag `esModuleInterop` to be true in `tsconfig.json`.
