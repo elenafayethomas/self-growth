@@ -75,3 +75,14 @@ import { type Cat } from './animals'
 ```
 
 For using ESM with CommonJS set the compiler flag `esModuleInterop` to be true in `tsconfig.json`.
+
+## Python Literals
+
+Allows for type checking in Python. Available in the `typing` module. [Link](https://docs.python.org/3/library/typing.html#typing.Literal).
+
+```python
+type Mode = Literal["r", "rb", "w", "wb"]
+
+def open_helper(file: str, mode: Mode) -> str:
+    ...
+```
