@@ -86,3 +86,28 @@ type Mode = Literal["r", "rb", "w", "wb"]
 def open_helper(file: str, mode: Mode) -> str:
     ...
 ```
+
+## Defer and Recover in Go
+
+* Defer: https://gobyexample.com/defer
+* Recover: https://gobyexample.com/recover
+
+`defer` is used to stop a function's execution only after the rest of the scope has finished executing. `recover()` must be called within a deferred function. When that function panics, the recover call will catch the panic and contain the error that has been raised.
+
+This is useful in tests where a function panics and this error needs to be tested. Whereas in Jest `expect(t).toThrow('<error_string>')` would be called, it can be done like so in Go:
+
+```golang
+func TestFeature(t *testing.T) {
+    defer func() {
+        r := recover()
+        msg := "Some error message"
+        if r.(error).Error() != msg {
+            t.Errorf("TestFeature error %s does not match %s", r, msg)
+        }
+    }()
+
+    someFunc() // this panics
+}
+```
+
+`panic()` should not be used under normal circumstances. This is only useful if dealing with auto-generated code or where a panic has had to be used for an exceptional circumstance.
