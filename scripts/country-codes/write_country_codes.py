@@ -1,7 +1,18 @@
+import re
 import sys
 
 import requests
 from bs4 import BeautifulSoup
+from unidecode import unidecode
+
+EXCEPTIONS = {
+    "Iran (Islamic Republic of)": "IRAN",
+    "Korea (the Democratic People's Republic of)": "NORTH_KOREA",
+    "Korea (the Republic of)": "SOUTH_KOREA",
+    "Taiwan (Province of China)": "TAIWAN",
+    "United Kingdom of Great Britain and Northern Ireland (the)": "UNITED_KINGDOM",
+    "United States of America (the)": "UNITED_STATES",
+}
 
 
 class CodeFormatter:
@@ -73,10 +84,30 @@ def format_codes(
 
     formatter.open_block(f"export class {class_name}")
 
+    def format_country_name(name: str) -> str:
+        if name in EXCEPTIONS:
+            return EXCEPTIONS[name]
+
+        _name = unidecode(name.lower())
+        matches = re.findall(
+            "'|\,|\-|\.|\([a-zA-Z0-9_,'-. ]+\)|\[[a-zA-Z0-9_,'-. ]+\]", _name
+        )
+
+        if len(matches) > 0:
+            matches.reverse()  # performs reverse on the original list. Has no return value
+            for match in matches:
+                _name = "{0} {1}".format(
+                    re.sub("[\[\]\(\),'-.]", "", match), _name.replace(match, "")
+                )
+
+        return "_".join(_name.upper().split())
+
     for key in codes:
         code = codes[key][0 if is_two_letters else 1]
         formatter.block_comment(key, ": ", code)
-        formatter.line(f"static readonly {code} = {class_name}.of('{code}')")
+        formatter.line(
+            f"static readonly {format_country_name(key)} = {class_name}.of('{code}')"
+        )
         formatter.line()
 
     formatter.open_block(f"static of(code: string): {class_name}")
@@ -90,5 +121,7 @@ def format_codes(
 
 
 if __name__ == "__main__":
-    path = sys.argv[1]
+    path = "-"
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
     format_codes(parse_codes(get_codes()), path=path)

@@ -1,3 +1,4 @@
+beautifulsoup4~=4.13.4
 black~=25.1.0
 requests~=2.32.4
-beautifulsoup4~=4.13.4
+unidecode~=1.4.0
